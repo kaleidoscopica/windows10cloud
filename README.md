@@ -3,9 +3,13 @@ This is a guide to creating a Windows 10 VM in a cloud environment.
 
 It's geared to users on neopets.com, who want to safely play old, outdated technologies like Shockwave and Flash, in order to accomplish their childhood goals.
 
+Currently it only has steps for Google Cloud Platform (GCP). 
+
+Users must place their trust in the provided Windows 10 VM from https://archive.org/details/msedge.win10.vmware.galoget - this is not mine and I simply trust that, as the uploader claims, it is Windows' official VM before they took it down from their own site for downloading.
+
 ## Preparing to make the VM
 
-Prereq: A Google Cloud Platform account, with billing already set up.
+Prereq: A Google Cloud Platform (GCP) account, with billing already set up. (Refer to Google's documentation for how to do this.)
 
 1. Download the official Windows 10 with MS-Edge VMDK .zip file from https://archive.org/details/msedge.win10.vmware.galoget - it's almost 7GB and may take some time to download. When complete, unzip the archive to get the MSEdge-Win10-VMware-disk1.vmdk file.
 
