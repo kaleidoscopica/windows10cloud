@@ -25,7 +25,7 @@ Prereq: A Google Cloud Platform (GCP) account, with billing already set up. (Ref
 
 7. Go back to the Create an image page at https://console.cloud.google.com/compute/mfce/images/create. Now we will go through the rest of the steps to create the image. First, name your image, ex 'windows-10'. Under Source Cloud Storage file, select browse, navigate to your bucket, and select the MSEdge-Win10-VMware-disk1.vmdk file. I chose us-central1 for the Region. Under Target Project, you should be able to select your project if you followed step #4 correctly. Everything else can be left as defaults; click Create. Mine ran the import for ~20 minutes.
 
-8. Now that the image is created, you should delete the MSEdge-Win10-VMware-disk1.vmdk file from your Cloud Storage bucket, to save on costs.
+8. Now that the image is created, you should delete the MSEdge-Win10-VMware-disk1.vmdk file from your Cloud Storage bucket, to save on costs. (This step is duplicated later on, in the **Cleanup** section, just in case.)
 
 
 ## Creating the Sole-Tenant Node Group
