@@ -7,6 +7,8 @@ Currently it only has steps for Google Cloud Platform (GCP).
 
 Users must place their trust in the provided Windows 10 VM from https://archive.org/details/msedge.win10.vmware.galoget - this is not mine and I simply trust that, as the uploader claims, it is Windows' official VM before they took it down from their own site for downloading.
 
+**Visit the Cleanup section** when done to avoid extra costs!!
+
 ## Preparing to make the VM
 
 Prereq: A Google Cloud Platform (GCP) account, with billing already set up. (Refer to Google's documentation for how to do this.)
