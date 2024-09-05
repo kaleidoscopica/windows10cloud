@@ -95,9 +95,11 @@ Prereq: A Google Cloud Platform (GCP) account, with billing already set up. (Ref
 
 1. Shutting down the VM is easy and can be done from within the OS (normal shutdown procedure). After a minute, you should see the VM has stopped, when you view it on the Compute Engine dashboard. You can also stop it from the dashboard by checking its box and hitting stop. (You can start it again in the same way, but click Start/Resume.)
 
-2. Once the VM has shut down, you should also navigate to Sole-tenant nodes, and verify that your node group has 0 nodes running. There may be a short lag while the node group detects the VM has shut down before it deletes its own node, so you may need to wait a minute. (This is **the** major cost - if nodes is not at 0 here, that's many buckos you'll be charged in the coming days.)
+2. Once the VM has shut down, you should also navigate to Sole-tenant nodes, and verify that your node group has 0 nodes running. There may be a short lag while the node group detects the VM has shut down before it deletes its own node, so you may need to wait a minute. (This is **the** major cost - you **NEED** nodes to be at 0 here before you walk away for the day.)
 
-3. As previously mentioned -- as long as you have autoscaling turned on properly for your sole-tenant node group, and make sure to shut down your VM when not in use, there are already some safeguards in place against the major costs -- but just in case, performing the full cleanup, that includes _deleting_ the VM and node group (see **Cleanup** section) will make 100% sure you don't accrue additional costs. As is, the VM does not incur CPU/memory charges while shutdown (assuming your autoscaling also shuts down the node from the sole-tenant node group afterward), but it has a 40GB boot disk that continues accruing storage costs until you fully delete it.
+3. **You can pause.** As previously mentioned -- as long as you have autoscaling turned on properly for your sole-tenant node group, and make sure to shut down your VM when not in use, there are already some safeguards in place against the major costs, and you can safely take a pause before coming back another day for more. There will still be small costs accruing (in the order of pennies/hour), but nothing that crazy. The VM does not incur CPU/memory charges while shutdown (assuming your autoscaling also shuts down the node from the sole-tenant node group afterward), but it has a 40GB boot disk that continues accruing storage costs until you fully delete it.
+
+4. **When FULLY done**, performing the full cleanup, that includes _deleting_ the VM and node group (see **Cleanup** section) will make 100% sure you don't accrue any more costs. 
    
 
 # Cleanup
