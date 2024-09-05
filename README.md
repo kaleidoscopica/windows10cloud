@@ -24,7 +24,7 @@ Prereq: A Google Cloud Platform (GCP) account, with billing already set up. (Ref
 
 3. Creating the bucket will take you to it. Click "Upload Files". Upload the MSEdge-Win10-VMware-disk1.vmdk file and wait for it to complete. 
 
-4. Navigate to Compute Engine. If it prompts you to enable the API first, do so, then come back. Then navigate tp Migrate to Virtual Machines. If a splash page comes up asking you to enable the VM Migration API, click Enable. Then navigate to Migrate to Virtual Machines again. On the right, click Targets, and scroll down to click Add a Target Project. Select your project and click Add (1).
+4. Navigate to Compute Engine. If it prompts you to enable the Compute Engine API first, do so, then come back. Then navigate to Migrate to Virtual Machines. If a splash page comes up asking you to enable the VM Migration API, click Enable. Then navigate to Migrate to Virtual Machines again. On the right, click Targets, and scroll down to click Add a Target Project. Select your project and click Add (1).
 
 5. Go to the Create an image page at https://console.cloud.google.com/compute/mfce/images/create. Name your image, ex 'windows-10'. Under Source Cloud Storage file, select browse, navigate to your bucket, and select the MSEdge-Win10-VMware-disk1.vmdk file. Notice how underneath there is a warning: "Migrate to Virtual Machines service account service-123456789@gcp-sa-vmmigration.iam.gserviceaccount.com needs to have the 'storage.objects.get' permission on the selected source file". Copy/paste the full name of the service account it gives you (ex: service-123456789@gcp-sa-vmmigration.iam.gserviceaccount.com).
 
