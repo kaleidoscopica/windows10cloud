@@ -7,11 +7,11 @@ Prereq: A Google Cloud Platform account, with billing already set up.
 
 1. Download the official Windows 10 with MS-Edge VMDK .zip file from https://archive.org/details/msedge.win10.vmware.galoget - it's almost 7GB and may take some time to download. When complete, unzip the archive to get the MSEdge-Win10-VMware-disk1.vmdk file.
 
-2. In your GCP Console https://console.cloud.google.com, navigate to Cloud Storage. Create a bucket. Give it a unique name. Under "Choose where to store your data", select Region. I used us-east1, but you can also choose either us-west1 or us-central1, as these are currently free to store 5 GB/month (our file is over this limit, but the first 5GBs will still be free). You can leave it as Standard storage -- this will also still be free to store the first 5 GB/month. Under "Choose how to protect object data", you can deselect "Soft delete policy (For data recovery)". Create the bucket and it warns you that public access will be prevented; that's okay, so click confirm.
+2. In your GCP Console https://console.cloud.google.com, navigate to Cloud Storage. If it prompts you to enable the API first, do so, then come back. Create a bucket. Give it a unique name. Under "Choose where to store your data", select Region. I used us-east1, but you can also choose either us-west1 or us-central1, as these are currently free to store 5 GB/month (our file is over this limit, but the first 5GBs will still be free). You can leave it as Standard storage -- this will also still be free to store the first 5 GB/month. Under "Choose how to protect object data", you can deselect "Soft delete policy (For data recovery)". Create the bucket and it warns you that public access will be prevented; that's okay, so click confirm.
 
 3. Creating the bucket will take you to it. Click "Upload Files". Upload the MSEdge-Win10-VMware-disk1.vmdk file and wait for it to complete. 
 
-4. Navigate to Compute Engine > Migrate to Virtual Machines. When a splash page comes up asking you to enable the VM Migration API, click Enable. Then navigate to Migrate to Virtual Machines again. On the right, click Targets, and scroll down to click Add a Target Project. Select your project and click Add (1).
+4. Navigate to Compute Engine. If it prompts you to enable the API first, do so, then come back. Then navigate tp Migrate to Virtual Machines. If a splash page comes up asking you to enable the VM Migration API, click Enable. Then navigate to Migrate to Virtual Machines again. On the right, click Targets, and scroll down to click Add a Target Project. Select your project and click Add (1).
 
 5. Go to the Create an image page at https://console.cloud.google.com/compute/mfce/images/create. Name your image, ex 'windows-10'. Under Source Cloud Storage file, select browse, navigate to your bucket, and select the MSEdge-Win10-VMware-disk1.vmdk file. Notice how underneath there is a warning: "Migrate to Virtual Machines service account service-123456789@gcp-sa-vmmigration.iam.gserviceaccount.com needs to have the 'storage.objects.get' permission on the selected source file". Copy/paste the full name of the service account it gives you (ex: service-123456789@gcp-sa-vmmigration.iam.gserviceaccount.com).
 
@@ -22,7 +22,7 @@ Prereq: A Google Cloud Platform account, with billing already set up.
 8. Now that the image is created, you should delete the MSEdge-Win10-VMware-disk1.vmdk file from your Cloud Storage bucket, to save on costs.
 
 
-==Creating the Sole-Tenant Node==
+# Creating the Sole-Tenant Node
 
 1. To run a custom Windows VM, GCP requires you to run it on a sole-tenant node. This seems to be due to Microsoft licensing terms requiring GCP to run Windows 10 on cloud hardware dedicated to you and you alone (i.e... blame Microsoft for the higher cost). First navigate to Compute Engine > Sole-tenant nodes.
 
@@ -33,7 +33,7 @@ Prereq: A Google Cloud Platform account, with billing already set up.
 5. Once approved, once again try to turn autoscaling to Off, with Number of nodes as 1. This time it should succeed.
 
 
-**Creating the Windows VM**
+# Creating the Windows VM
 
 1. In Compute Engine, navigate to Storage > Images. You should see your windows-10 image at the top of the list. Click the '...' under Actions on the right, and Create instance.
 
@@ -44,7 +44,7 @@ Prereq: A Google Cloud Platform account, with billing already set up.
 4. Go to Network Security > Firewall Policies. You need to create a firewall rule to allow your IP to access your VM. Click Create Firewall Rule, at the top. Name the rule 'allow-my-rdp' (or you can name it anything you want). Under Targets, select All instances in the network. Under Source IPv4 Ranges, paste your IP, then append /32 to it before leaving the box (ex: 1.2.3.4/32). Under Protocols and ports, make sure Specified protocols and ports is selected, and check the box for TCP, and in the TCP box, enter 3389. Leave everything else alone. Click Create.
 
 
-**Accessing the VM**
+# Accessing the VM
 
 1. Macs: Go to the App Store and download the Microsoft Remote Desktop app.
 
@@ -56,7 +56,7 @@ Prereq: A Google Cloud Platform account, with billing already set up.
 
 5. Double click the new box that popped up and let it start connecting. When it prompts you for a username, enter `IEUser`. For password, enter `Passw0rd!` and connect. It warns you that the certificate cannot be verified; this is fine. 
 
-**Cleanup**
+# Cleanup
 
 ***THIS IS VERY IMPORTANT!*** Failing to clean up your resources will charge you hundreds of dollars over the next days/weeks!
 
@@ -64,6 +64,6 @@ Prereq: A Google Cloud Platform account, with billing already set up.
 
 2. Under Sole-tenant nodes, delete your sole-tenant node-group.
 
-3. Navigate to your Cloud Storage bucket and delete the MSEdge-Win10-VMware-disk1.vmdk file from the bucket.
+3. If you haven't already done so, navigate to your Cloud Storage bucket and delete the MSEdge-Win10-VMware-disk1.vmdk file from the bucket.
 
 4. Optionally (but ideally only once you have completed your goals with Windows 10, as this will make it harder to easily spin up the environment again), go to Storage > Images and delete the windows-10 image.
