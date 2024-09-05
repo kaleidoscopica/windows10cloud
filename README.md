@@ -38,8 +38,6 @@ Prereq: A Google Cloud Platform (GCP) account, with billing already set up. (Ref
 
 5. Once approved, once again try to turn autoscaling to On, with Number of nodes as 1. This time it should succeed. This is the setting you should keep - it will make sure that a node is only created in your node pool once you try and create the Windows VM, and while it is actually running. When you shut down (or delete) the Windows VM, it will also remove the node that it was placed onto. This should save you money and is **good**.
 
-6. **TIMER STARTS NOW!** This is the major cost associated with this setup - it will charge you a few bucks per hour, and adds up quick! Go as fast as you can to finish the setup and accomplish your objectives. As long as you have autoscaling turned on properly for your sole-tenant node group, and make sure to shut down your VM when not in use, there are already some safeguards in place against the major costs -- but just in case, performing the full cleanup (see **Cleanup** section) will make 100% sure you don't accrue additional costs.
-
 
 ## Creating the Windows VM
 
@@ -50,6 +48,8 @@ Prereq: A Google Cloud Platform (GCP) account, with billing already set up. (Ref
 3. It's a bad idea to let just anyone RDP to your VM. You need to whitelist your unique IP address, so ideally your IP stays stable (most should stay fairly stable over a few days, if you are using the same computer, on the same network). To find out your IP, go to icanhazip.com and copy the result. If you lose ability to RDP to your VM on a subsequent day, check whether your IP has changed by again visiting icanhazip.com.
 
 4. Go to VPC Network > Firewall. You need to create a firewall rule to allow your IP to access your VM. Click Create Firewall Rule, at the top. Name the rule 'allow-my-rdp' (or you can name it anything you want). Under Targets, select All instances in the network. Under Source IPv4 Ranges, paste your IP, then append /32 to it before leaving the box (ex: 1.2.3.4/32). Under Protocols and ports, make sure Specified protocols and ports is selected, and check the box for TCP, and in the TCP box, enter 3389. Leave everything else alone. Click Create.
+
+5. **TIMER STARTS NOW!** This is the major cost associated with this setup - it will charge you a few bucks per hour, and adds up quick! Go as fast as you can to finish the setup and accomplish your objectives. As long as you have autoscaling turned on properly for your sole-tenant node group, and make sure to shut down your VM when not in use, there are already some safeguards in place against the major costs -- but just in case, performing the full cleanup (see **Cleanup** section) will make 100% sure you don't accrue additional costs.
 
 
 ## Accessing the VM
