@@ -7,7 +7,7 @@ Currently it only has steps for Google Cloud Platform (GCP).
 
 Users must place their trust in the provided Windows 10 VM from https://archive.org/details/msedge.win10.vmware.galoget - this is not mine and I simply trust that, as the uploader claims, it is Windows' official VM before they took it down from their own site for downloading.
 
-At current rates, and when following instructions correctly, running the VM should cost $3.445332/hour in the us-central1 region (per https://cloud.google.com/compute/sole-tenant-pricing). It is not free. But, it's cheaper than buying a new computer, with a new Windows license.
+At current rates, and when following instructions correctly, running the VM should cost $3.445332/hour in the us-central1 region (per https://cloud.google.com/compute/sole-tenant-pricing). There are much smaller additional costs, in the order of pennies/hour, for things like storage (storing the files and images needed to create the VM, as well as the VM's own boot disk). It is not free. But, it's cheaper than buying a new computer, with a new Windows license.
 
 **Visit the Cleanup section** when done to avoid extra costs!!
 
