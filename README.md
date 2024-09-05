@@ -1,7 +1,7 @@
 # windows10cloud
 This is a guide to creating a Windows 10 VM in a cloud environment.
 
-**Preparing to make the VM**
+## Preparing to make the VM
 
 Prereq: A Google Cloud Platform account, with billing already set up.
 
@@ -22,7 +22,7 @@ Prereq: A Google Cloud Platform account, with billing already set up.
 8. Now that the image is created, you should delete the MSEdge-Win10-VMware-disk1.vmdk file from your Cloud Storage bucket, to save on costs.
 
 
-# Creating the Sole-Tenant Node
+## Creating the Sole-Tenant Node
 
 1. To run a custom Windows VM, GCP requires you to run it on a sole-tenant node. This seems to be due to Microsoft licensing terms requiring GCP to run Windows 10 on cloud hardware dedicated to you and you alone (i.e... blame Microsoft for the higher cost). First navigate to Compute Engine > Sole-tenant nodes.
 
@@ -30,31 +30,35 @@ Prereq: A Google Cloud Platform account, with billing already set up.
 
 4. The sole-tenant node is not created yet. A new project likely does not have an appropriate CPU quota for this type of node yet, so we must request this, and wait. To trigger this, edit the node group you just created, and try to turn autoscaling to Off, with Number of nodes as 1. This action will fail if you do not have enough quota, but you will see a notification that prompts you to "Request Quota" - follow that link, and click the "..." on the right of the quota to select "Edit Quota". Follow the instructions. You will want to request at least 60 vCPUs. This should increase both C2_CPUS and CPUS_ALL_REGIONS quotas to 60. As justification, you can write something like "I want to create a sole-tenant node." The GCP team will probably approve your request, and it should be fairly quick, but you may need to wait a little bit.
 
-5. Once approved, once again try to turn autoscaling to Off, with Number of nodes as 1. This time it should succeed.
+5. Once approved, once again try to turn autoscaling to On, with Number of nodes as 1. This time it should succeed.
+
+6. **Timer starts NOW!** This is the major cost associated with this setup - it will charge you a few bucks per hour, and adds up quick! Go as fast as you can to finish the setup and accomplish your objectives, and promptly spin down the node in the Cleanup section at the end!
 
 
-# Creating the Windows VM
+## Creating the Windows VM
 
 1. In Compute Engine, navigate to Storage > Images. You should see your windows-10 image at the top of the list. Click the '...' under Actions on the right, and Create instance.
 
-2. Name the VM; I named it 'windows-10'. I kept the Region as us-central1. You will need to select the zone that your sole-tenant node is in. You also need to select the c2-standard-4 machine type to match the sole-tenant node. Under Advanced Configuration, in the Sole-tenancy dropdown, it prompts you to input a node affinity - you have to click Browse and match it with your sole-tenant node pool. When done, click Create.
+2. Name the VM; I named it 'windows-10'. I kept the Region as us-central1. You will need to select the zone that your sole-tenant node is in. You also need to select the c2-standard-4 machine type (under Compute optimized) to match the sole-tenant node. Under Advanced Options, at the very bottom, expand the Sole-tenancy dropdown - it prompts you to input a node affinity. You have to click Browse and match it with your sole-tenant node pool. (If it takes too long to display anything, click Cancel and try again and it should find it more quickly.) When done, click Create.
 
 3. It's a bad idea to let just anyone RDP to your VM. You need to whitelist your unique IP address, so ideally your IP stays stable (most should stay fairly stable over a few days, if you are using the same computer, on the same network). To find out your IP, go to icanhazip.com and copy the result. If you lose ability to RDP to your VM on a subsequent day, check whether your IP has changed by again visiting icanhazip.com.
 
 4. Go to Network Security > Firewall Policies. You need to create a firewall rule to allow your IP to access your VM. Click Create Firewall Rule, at the top. Name the rule 'allow-my-rdp' (or you can name it anything you want). Under Targets, select All instances in the network. Under Source IPv4 Ranges, paste your IP, then append /32 to it before leaving the box (ex: 1.2.3.4/32). Under Protocols and ports, make sure Specified protocols and ports is selected, and check the box for TCP, and in the TCP box, enter 3389. Leave everything else alone. Click Create.
 
 
-# Accessing the VM
+## Accessing the VM
 
 1. Macs: Go to the App Store and download the Microsoft Remote Desktop app.
+   Windows: On your local Windows PC, you can use the search box on the taskbar, type Remote Desktop Connection, and then select Remote Desktop Connection. In Remote Desktop Connection, type the name of the PC you want to connect to (from Step 1), and then select Connect.
 
-2. After initial setup (you can allow microphone/camera access) click "Add PC".
+3. After initial setup (you can allow microphone/camera access) click "Add PC".
 
-3. In the GCP console, navigate back to VM instances, under Compute Engine. Note that your windows-10 VM has an external IP listed in the External IP column. Copy this value.
+4. In the GCP console, navigate back to VM instances, under Compute Engine. Note that your windows-10 VM has an external IP listed in the External IP column. Copy this value.
 
-4. Paste the external IP into the PC Name field. Leave everything else as defaults and click Save.
+5. Paste the external IP into the PC Name field. Leave everything else as defaults and click Save.
 
-5. Double click the new box that popped up and let it start connecting. When it prompts you for a username, enter `IEUser`. For password, enter `Passw0rd!` and connect. It warns you that the certificate cannot be verified; this is fine. 
+6. Double click the new box that popped up and let it start connecting. When it prompts you for a username, enter `IEUser`. For password, enter `Passw0rd!` and connect. It warns you that the certificate cannot be verified; this is fine. 
+
 
 # Cleanup
 
