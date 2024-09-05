@@ -22,7 +22,7 @@ Prereq: A Google Cloud Platform account, with billing already set up.
 8. Now that the image is created, you should delete the MSEdge-Win10-VMware-disk1.vmdk file from your Cloud Storage bucket, to save on costs.
 
 
-## Creating the Sole-Tenant Node
+## Creating the Sole-Tenant Node Group
 
 1. To run a custom Windows VM, GCP requires you to run it on a sole-tenant node. This seems to be due to Microsoft licensing terms requiring GCP to run Windows 10 on cloud hardware dedicated to you and you alone (i.e... blame Microsoft for the higher cost). First navigate to Compute Engine > Sole-tenant nodes.
 
@@ -30,9 +30,9 @@ Prereq: A Google Cloud Platform account, with billing already set up.
 
 4. The sole-tenant node is not created yet. A new project likely does not have an appropriate CPU quota for this type of node yet, so we must request this, and wait. To trigger this, edit the node group you just created, and try to turn autoscaling to Off, with Number of nodes as 1. This action will fail if you do not have enough quota, but you will see a notification that prompts you to "Request Quota" - follow that link, and click the "..." on the right of the quota to select "Edit Quota". Follow the instructions. You will want to request at least 60 vCPUs. This should increase both C2_CPUS and CPUS_ALL_REGIONS quotas to 60. As justification, you can write something like "I want to create a sole-tenant node." The GCP team will probably approve your request, and it should be fairly quick, but you may need to wait a little bit.
 
-5. Once approved, once again try to turn autoscaling to On, with Number of nodes as 1. This time it should succeed.
+5. Once approved, once again try to turn autoscaling to On, with Number of nodes as 1. This time it should succeed. This is the setting you should keep - it will make sure that a node is only created in your node pool once you try and create the Windows VM, and while it is actually running. When you shut down (or delete) the Windows VM, it will also remove the node that it was placed onto. This should save you money and is **good**.
 
-6. **Timer starts NOW!** This is the major cost associated with this setup - it will charge you a few bucks per hour, and adds up quick! Go as fast as you can to finish the setup and accomplish your objectives, and promptly spin down the node in the Cleanup section at the end!
+6. **Timer starts NOW!** This is the major cost associated with this setup - it will charge you a few bucks per hour, and adds up quick! Go as fast as you can to finish the setup and accomplish your objectives. As long as you have autoscaling turned on properly for your sole-tenant node group, and make sure to shut down your VM when not in use, there are already some safeguards in place against the major costs -- but just in case, performing the full cleanup (see **Cleanup** section) will make 100% sure you don't accrue additional costs.
 
 
 ## Creating the Windows VM
@@ -43,7 +43,7 @@ Prereq: A Google Cloud Platform account, with billing already set up.
 
 3. It's a bad idea to let just anyone RDP to your VM. You need to whitelist your unique IP address, so ideally your IP stays stable (most should stay fairly stable over a few days, if you are using the same computer, on the same network). To find out your IP, go to icanhazip.com and copy the result. If you lose ability to RDP to your VM on a subsequent day, check whether your IP has changed by again visiting icanhazip.com.
 
-4. Go to Network Security > Firewall Policies. You need to create a firewall rule to allow your IP to access your VM. Click Create Firewall Rule, at the top. Name the rule 'allow-my-rdp' (or you can name it anything you want). Under Targets, select All instances in the network. Under Source IPv4 Ranges, paste your IP, then append /32 to it before leaving the box (ex: 1.2.3.4/32). Under Protocols and ports, make sure Specified protocols and ports is selected, and check the box for TCP, and in the TCP box, enter 3389. Leave everything else alone. Click Create.
+4. Go to VPC Network > Firewall. You need to create a firewall rule to allow your IP to access your VM. Click Create Firewall Rule, at the top. Name the rule 'allow-my-rdp' (or you can name it anything you want). Under Targets, select All instances in the network. Under Source IPv4 Ranges, paste your IP, then append /32 to it before leaving the box (ex: 1.2.3.4/32). Under Protocols and ports, make sure Specified protocols and ports is selected, and check the box for TCP, and in the TCP box, enter 3389. Leave everything else alone. Click Create.
 
 
 ## Accessing the VM
@@ -71,27 +71,30 @@ Prereq: A Google Cloud Platform account, with billing already set up.
 - Because this version of Windows 10 is running in the cloud, Fiddler prompts you to use WinConfig to enable traffic capture. Follow its advice - click WinConfig, click Exempt All, and Save Changes.
 - I did have to install Flash in Windows 7 compatibility mode, and as Administrator.
 - Internet Explorer is already installed on this version of Windows 10 (you can find it via the start menu/search), so you don't need to follow the section called "Opening IE (Windows 10 and up)". **Do** go down to "Initial IE Setup" and follow those steps, though.
-- If you have Neopass, logging in to Neopets first via Chrome is helpful to get your document cookie and copy that over to IE.
+- If you have Neopass, logging in to Neopets first via Chrome is helpful to get your document cookie and copy that over to IE (bottom steps on https://github.com/SpudMonkey7k/neopets-IE under Neopass).
 - The guide has a warning that "If IE freezes trying to load Neopets, please remove neopets from Compatibility Settings!" - I did find this to be the case for me.
 - Many Neopets main pages don't load in IE, so go directly to https://neopets.com/games/classic.phtml to go to the game library. 
-- The game I tested to make sure Shockwave was working was Hannah and the Pirate Caves. It initially warned me that "It appears that this game is not running at its intended location." Following others advice, I had to press and hold shift + o + k. Loading the game in the lowest setting seemed to help. After that, it loaded and the buttons worked.
+- The game I tested to make sure Shockwave was working was Hannah and the Pirate Caves. It initially warned me that "It appears that this game is not running at its intended location." Following others advice, I had to press and hold shift + o + k while loading. Loading the game in the lowest setting also seemed to help. 
+- I haven't done much other testing yet, and I didn't try to send a score, so let me know if there's anything missing.
 
-## Taking a snapshot
 
-1. Now that you've finished your initial setup and got everything working how you like, it's a good idea to take a snapshot so that you don't have to repeat the OS setup steps if you delete the VM and create a new one in the future. To do this, navigate to Compute Engine > Storage > Snapshots. Click Create Snapshot. **Note:** I suggest to shutdown the VM before doing this, just in case.
+## Done?
 
-2. Name your snapshot anything you like, such as 'windows-snapshot'. Leave the description blank. Leave Snapshot source type as Disk. For the Source disk field, choose your windows-10 disk. Scroll down to Location and switch it to Regional. Leave everything else as defaults and Create.
+1. Shutting down the VM is easy and can be done from within the OS (normal shutdown procedure). After a minute, you should see the VM has stopped, when you view it on the Compute Engine dashboard. You can also stop it from the dashboard by checking its box and hitting stop. You can start it again in the same way, but click Start/Resume.
 
-3. From now on, even though immediately after this experiment you SHOULD go to the Cleanup section and shut everything down to save costs (!!!!), it will be easier for you to redo the steps and get to the point that you can immediately login to Neopets and start playing games next time you make the VM (in the **Creating the Windows VM** portion of the steps) if you navigate to your newly created snapshot, and hit "Create Instance". This will create the VM in the same installation state as where you left it, instead of as the brand new blank state you started with.
+2. As previously mentioned -- as long as you have autoscaling turned on properly for your sole-tenant node group, and make sure to shut down your VM when not in use, there are already some safeguards in place against the major costs -- but just in case, performing the full cleanup, that includes _deleting_ the VM (see **Cleanup** section) will make 100% sure you don't accrue additional costs. As is, the VM does not incur CPU/memory charges while shutdown (assuming your autoscaling also shuts down the node from the sole-tenant node group afterward), but it has a 40GB boot disk that continues accruing storage costs until you fully delete it.
+   
 
 # Cleanup
 
-***THIS IS VERY IMPORTANT!*** Failing to clean up your resources will charge you hundreds of dollars over the next days/weeks!
+***THIS IS VERY IMPORTANT!*** Failing to clean up your resources properly could have GCP charge you hundreds of dollars over the next days/weeks!
 
-1. On the main Compute Engine dashboard, delete the your windows-10 VM.
+1. On the main Compute Engine dashboard, delete your windows-10 VM. (If it's only shut down, most of the 
 
 2. Under Sole-tenant nodes, delete your sole-tenant node-group.
 
 3. If you haven't already done so, navigate to your Cloud Storage bucket and delete the MSEdge-Win10-VMware-disk1.vmdk file from the bucket.
 
-4. Optionally (but ideally only once you have completed your goals with Windows 10, as this will make it harder to easily spin up the environment again), go to Storage > Images and delete the windows-10 image.
+4. Go to Storage > Images and delete the windows-10 image.
+
+5. At this point, nothing should be accruing costs anymore, but you should double-check by following up in the **Billing** section both the next day, and the day after that -- sometimes costs take a day or two to post. If you still see services accruing costs, that section will help you find them and shut them down.
