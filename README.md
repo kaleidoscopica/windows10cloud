@@ -1,6 +1,8 @@
 # windows10cloud
 This is a guide to creating a Windows 10 VM in a cloud environment.
 
+It's geared to users on neopets.com, who want to safely play old, outdated technologies like Shockwave and Flash, in order to accomplish their childhood goals.
+
 ## Preparing to make the VM
 
 Prereq: A Google Cloud Platform account, with billing already set up.
