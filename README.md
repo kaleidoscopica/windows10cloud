@@ -38,7 +38,7 @@ Prereq: A Google Cloud Platform (GCP) account, with billing already set up. (Ref
 
 5. Once approved, once again try to turn autoscaling to On, with Number of nodes as 1. This time it should succeed. This is the setting you should keep - it will make sure that a node is only created in your node pool once you try and create the Windows VM, and while it is actually running. When you shut down (or delete) the Windows VM, it will also remove the node that it was placed onto. This should save you money and is **good**.
 
-6. **Timer starts NOW!** This is the major cost associated with this setup - it will charge you a few bucks per hour, and adds up quick! Go as fast as you can to finish the setup and accomplish your objectives. As long as you have autoscaling turned on properly for your sole-tenant node group, and make sure to shut down your VM when not in use, there are already some safeguards in place against the major costs -- but just in case, performing the full cleanup (see **Cleanup** section) will make 100% sure you don't accrue additional costs.
+6. **TIMER STARTS NOW!** This is the major cost associated with this setup - it will charge you a few bucks per hour, and adds up quick! Go as fast as you can to finish the setup and accomplish your objectives. As long as you have autoscaling turned on properly for your sole-tenant node group, and make sure to shut down your VM when not in use, there are already some safeguards in place against the major costs -- but just in case, performing the full cleanup (see **Cleanup** section) will make 100% sure you don't accrue additional costs.
 
 
 ## Creating the Windows VM
@@ -77,8 +77,8 @@ Prereq: A Google Cloud Platform (GCP) account, with billing already set up. (Ref
 - Because this version of Windows 10 is running in the cloud, Fiddler prompts you to use WinConfig to enable traffic capture. Follow its advice - click WinConfig, click Exempt All, and Save Changes.
 - I did have to install Flash in Windows 7 compatibility mode, and as Administrator.
 - Internet Explorer is already installed on this version of Windows 10 (you can find it via the start menu/search), so you don't need to follow the section called "Opening IE (Windows 10 and up)". **Do** go down to "Initial IE Setup" and follow those steps, though.
+   The guide has a warning that "If IE freezes trying to load Neopets, please remove neopets from Compatibility Settings!" - I did find this to be the case for me.
 - If you have Neopass, logging in to Neopets first via Chrome is helpful to get your document cookie and copy that over to IE (bottom steps on https://github.com/SpudMonkey7k/neopets-IE under Neopass).
-- The guide has a warning that "If IE freezes trying to load Neopets, please remove neopets from Compatibility Settings!" - I did find this to be the case for me.
 - Many Neopets main pages don't load in IE, so go directly to https://neopets.com/games/classic.phtml to go to the game library. 
 - The game I tested to make sure Shockwave was working was Hannah and the Pirate Caves. It initially warned me that "It appears that this game is not running at its intended location." Following others advice, I had to press and hold shift + o + k while loading. Loading the game in the lowest setting also seemed to help. 
 - I haven't done much other testing yet, and I didn't try to send a score, so let me know if there's anything missing.
@@ -86,9 +86,11 @@ Prereq: A Google Cloud Platform (GCP) account, with billing already set up. (Ref
 
 ## Done?
 
-1. Shutting down the VM is easy and can be done from within the OS (normal shutdown procedure). After a minute, you should see the VM has stopped, when you view it on the Compute Engine dashboard. You can also stop it from the dashboard by checking its box and hitting stop. You can start it again in the same way, but click Start/Resume.
+1. Shutting down the VM is easy and can be done from within the OS (normal shutdown procedure). After a minute, you should see the VM has stopped, when you view it on the Compute Engine dashboard. You can also stop it from the dashboard by checking its box and hitting stop. (You can start it again in the same way, but click Start/Resume.)
 
-2. As previously mentioned -- as long as you have autoscaling turned on properly for your sole-tenant node group, and make sure to shut down your VM when not in use, there are already some safeguards in place against the major costs -- but just in case, performing the full cleanup, that includes _deleting_ the VM (see **Cleanup** section) will make 100% sure you don't accrue additional costs. As is, the VM does not incur CPU/memory charges while shutdown (assuming your autoscaling also shuts down the node from the sole-tenant node group afterward), but it has a 40GB boot disk that continues accruing storage costs until you fully delete it.
+2. Once the VM has shut down, you should also navigate to Sole-tenant nodes, and verify that your node group has 0 nodes running. There may be a short lag while the node group detects the VM has shut down before it deletes its own node, so you may need to wait a minute. (This is **the** major cost - if nodes is not at 0 here, that's many buckos you'll be charged in the coming days.)
+
+3. As previously mentioned -- as long as you have autoscaling turned on properly for your sole-tenant node group, and make sure to shut down your VM when not in use, there are already some safeguards in place against the major costs -- but just in case, performing the full cleanup, that includes _deleting_ the VM and node group (see **Cleanup** section) will make 100% sure you don't accrue additional costs. As is, the VM does not incur CPU/memory charges while shutdown (assuming your autoscaling also shuts down the node from the sole-tenant node group afterward), but it has a 40GB boot disk that continues accruing storage costs until you fully delete it.
    
 
 # Cleanup
