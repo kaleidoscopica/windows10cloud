@@ -97,7 +97,7 @@ Prereq: A Google Cloud Platform (GCP) account, with billing already set up. (Ref
 
 ***THIS IS VERY IMPORTANT!*** Failing to clean up your resources properly could have GCP charge you hundreds of dollars over the next days/weeks!
 
-1. On the main Compute Engine dashboard, delete your windows-10 VM. (If it's only shut down, most of the 
+1. On the main Compute Engine dashboard, delete your windows-10 VM.
 
 2. Under Sole-tenant nodes, delete your sole-tenant node-group.
 
