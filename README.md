@@ -48,16 +48,17 @@ Prereq: A Google Cloud Platform account, with billing already set up.
 
 ## Accessing the VM
 
-1. Macs: Go to the App Store and download the Microsoft Remote Desktop app.
-   Windows: On your local Windows PC, you can use the search box on the taskbar, type Remote Desktop Connection, and then select Remote Desktop Connection. In Remote Desktop Connection, type the name of the PC you want to connect to (from Step 1), and then select Connect.
+1. MacOS: Go to the App Store and download the Microsoft Remote Desktop app. After initial setup (you can allow microphone/camera access) click "Add PC".
 
-3. After initial setup (you can allow microphone/camera access) click "Add PC".
+   Windows: On your local Windows PC, you can use the search box on the taskbar, type Remote Desktop Connection, and then select Remote Desktop Connection. You can also download and use the Remote Desktop app, from the Microsoft Store.
 
-4. In the GCP console, navigate back to VM instances, under Compute Engine. Note that your windows-10 VM has an external IP listed in the External IP column. Copy this value.
+3. In the GCP console, navigate back to VM instances, under Compute Engine. Note that your windows-10 VM has an external IP listed in the External IP column. Copy this value.
 
-5. Paste the external IP into the PC Name field. Leave everything else as defaults and click Save.
+4. Paste the external IP into the PC Name (or Computer) field. Leave everything else as defaults and click Save (or Connect).
 
-6. Double click the new box that popped up and let it start connecting. When it prompts you for a username, enter `IEUser`. For password, enter `Passw0rd!` and connect. It warns you that the certificate cannot be verified; this is fine. 
+5. If on a Mac, you may need to double click the new box that popped up and let it start connecting.
+  
+6. When it prompts you for a username, enter `IEUser`. For password, enter `Passw0rd!` and connect. It warns you that the certificate cannot be verified; this is fine. 
 
 
 # Cleanup
