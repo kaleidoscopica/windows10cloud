@@ -58,8 +58,31 @@ Prereq: A Google Cloud Platform account, with billing already set up.
 
 5. If on a Mac, you may need to double click the new box that popped up and let it start connecting.
   
-6. When it prompts you for a username, enter `IEUser`. For password, enter `Passw0rd!` and connect. It warns you that the certificate cannot be verified; this is fine. 
+6. When it prompts you for a username, enter `IEUser`. For password, enter `Passw0rd!` and connect. It warns you that the certificate cannot be verified; this is fine.
 
+
+## Accomplishing your Neopets goals 
+
+1. Once in the VM, click the "e" in the taskbar. Ignore it when it prompts you to "download Edge". Just go straight to the search bar and Google "chrome" to find, download, and install Google Chrome. (This version of Edge does not have great compatibility with viewing the Github guides linked in the next section, so it's better to use Chrome.)
+
+2. Open Chrome and go to https://github.com/SpudMonkey7k/neopets-IE. Follow the steps in there to download and install Fiddler, Flash, Shockwave, and 3dvia. 
+
+**Gotchas**:
+- Because this version of Windows 10 is running in the cloud, Fiddler prompts you to use WinConfig to enable traffic capture. Follow its advice - click WinConfig, click Exempt All, and Save Changes.
+- I did have to install Flash in Windows 7 compatibility mode, and as Administrator.
+- Internet Explorer is already installed on this version of Windows 10 (you can find it via the start menu/search), so you don't need to follow the section called "Opening IE (Windows 10 and up)". **Do** go down to "Initial IE Setup" and follow those steps, though.
+- If you have Neopass, logging in to Neopets first via Chrome is helpful to get your document cookie and copy that over to IE.
+- The guide has a warning that "If IE freezes trying to load Neopets, please remove neopets from Compatibility Settings!" - I did find this to be the case for me.
+- Many Neopets main pages don't load in IE, so go directly to https://neopets.com/games/classic.phtml to go to the game library. 
+- The game I tested to make sure Shockwave was working was Hannah and the Pirate Caves. It initially warned me that "It appears that this game is not running at its intended location." Following others advice, I had to press and hold shift + o + k. Loading the game in the lowest setting seemed to help. After that, it loaded and the buttons worked.
+
+## Taking a snapshot
+
+1. Now that you've finished your initial setup and got everything working how you like, it's a good idea to take a snapshot so that you don't have to repeat the OS setup steps if you delete the VM and create a new one in the future. To do this, navigate to Compute Engine > Storage > Snapshots. Click Create Snapshot. **Note:** I suggest to shutdown the VM before doing this, just in case.
+
+2. Name your snapshot anything you like, such as 'windows-snapshot'. Leave the description blank. Leave Snapshot source type as Disk. For the Source disk field, choose your windows-10 disk. Scroll down to Location and switch it to Regional. Leave everything else as defaults and Create.
+
+3. From now on, even though immediately after this experiment you SHOULD go to the Cleanup section and shut everything down to save costs (!!!!), it will be easier for you to redo the steps and get to the point that you can immediately login to Neopets and start playing games next time you make the VM (in the **Creating the Windows VM** portion of the steps) if you navigate to your newly created snapshot, and hit "Create Instance". This will create the VM in the same installation state as where you left it, instead of as the brand new blank state you started with.
 
 # Cleanup
 
