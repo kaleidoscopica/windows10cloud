@@ -106,7 +106,7 @@ Prereq: A Google Cloud Platform (GCP) account, with billing already set up. (Ref
 
 # Cleanup
 
-***THIS IS VERY IMPORTANT!*** Failing to clean up your resources properly could have GCP charge you hundreds of dollars over the next days/weeks!
+***THIS IS VERY IMPORTANT!*** Failing to clean up your resources properly could lead to significant charges over the next days/weeks/months!
 
 1. On the main Compute Engine dashboard, delete your windows-10 VM.
 
