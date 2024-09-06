@@ -95,7 +95,7 @@ Prereq: A Google Cloud Platform (GCP) account, with billing already set up. (Ref
 - To install 3DVIA Player, try to play Shenkuu River Rush (make sure Fiddler is running). When it says this webpage wants to run the 3DVIA Player add-on, click Allow. When Windows then comes up with the installation prompt, install it. Allow it to reboot (you'll have to RDP back into it when it's done). 
 - You can just click 'No' whenever IE asks you if you want to debug a webpage.
 - The game I tested to make sure Shockwave was working was Hannah and the Pirate Caves. It initially warned me that "It appears that this game is not running at its intended location." Following others advice, I had to press and hold shift + o + k while loading. Loading the game in the lowest setting also seemed to help.
-- I didn't bother trying to get Flash to work, since other guides outline how to do this on Mac just fine. I mainly wanted to get Shockwave and 3DVIA working. For Flash, you are better off using other workarounds, as that's easier to get working outside the VM environment (and will cost you less money).
+- I didn't bother trying to get Flash to work, since other guides outline how to do this on Mac just fine. I mainly wanted to get Shockwave and 3DVIA working. For Flash, you are better off using other workarounds, unless you are trying to do something specific like play Extreme Potato Counter or Assignment 53. (If you do, and have success with it, let me know and I'll add a note for others that this approach works!)
 - I haven't yet tried sending a score. If any issues with that, let me know.
 
 ## Done?
