@@ -11,7 +11,7 @@ Users must place their trust in the provided Windows 10 VM from https://archive.
 
 At current rates, and when following instructions correctly, running the VM should cost $3.445332/hour in the us-central1 region (per https://cloud.google.com/compute/sole-tenant-pricing). There are much smaller additional costs, in the order of pennies/hour, for things like storage (storing the files and images needed to create the VM, as well as the VM's own boot disk). **It is not free**.
 
-But, it's cheaper than buying a new computer, with a new Windows license.
+But, it's cheaper than buying a new computer, or a new Windows license.
 
 **Visit the Cleanup section** when done to avoid extra costs!
 
