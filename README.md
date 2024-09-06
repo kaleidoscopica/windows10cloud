@@ -3,7 +3,9 @@ This is a guide to creating a Windows 10 VM in a cloud environment.
 
 It's geared to users on neopets.com, who want to safely play old, outdated technologies like Shockwave and Flash, in order to accomplish their childhood goals.
 
-Currently it only has steps for Google Cloud Platform (GCP). 
+Specifically, it was born out of a need for users on MacOS to play Shockwave games reliably, particularly since while workarounds exist to get most Flash games working on Macs, Shockwave and 3dvia were hit-or-miss (mostly miss), and have greatest success when installed on a Windows 10 VM. M Series/Apple Silicon devices have great difficulty emulating Windows 10 VMs, so this is difficult to do on recent Macbooks. So, this guide caters to Mac users and especially Mac users who want to run Shockwave and 3dvia games. For other use cases, it's probably not practical -- even if you do need to run a Windows VM to get the games working, it's cheaper to do so on a device you already own, especially if you have an architecture that can already do so natively, like another Windows PC. (Guides already exist for that and I won't cover it here.)
+
+Currently, this guide only has steps for Google Cloud Platform (GCP). I have no plans to add steps for AWS or Azure.
 
 Users must place their trust in the provided Windows 10 VM from https://archive.org/details/msedge.win10.vmware.galoget - this is not mine and I simply trust that, as the uploader claims, it is Windows' official VM before they took it down from their own site for downloading.
 
