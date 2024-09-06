@@ -3,7 +3,9 @@ This is a guide to creating a Windows 10 VM in a cloud environment.
 
 It's geared to users on neopets.com, who want to safely play old, outdated technologies like Shockwave and 3DVIA, in order to accomplish their childhood goals.
 
-Specifically, it was born out of a need for users on MacOS to play Shockwave and 3DVIA games reliably, particularly since while workarounds exist to get most Flash games working on Macs, Shockwave and 3DVIA have greatest success when installed on a Windows 10 VM. M Series/Apple Silicon devices have great difficulty emulating Windows 10 VMs. So, this guide caters to Mac users and especially Mac users who want to run Shockwave and 3DVIA games. For other use cases, it's probably not practical: there are already guides for Flash on MacOS, and for other use cases, even if you do need to run a Windows VM to get things working, it's cheaper to do so on a device you already own, like another Windows PC or pre-Silicon Macs. Guides already exist for those, and I won't cover it here.
+Specifically, it was born out of a need for users on MacOS to play Shockwave and 3DVIA games reliably, particularly since while workarounds exist to get most Flash games working on Macs, Shockwave and 3DVIA have greatest success when installed on a Windows 10 VM. M Series/Apple Silicon devices have great difficulty emulating Windows 10 VMs. So, this guide caters to Mac users and especially Mac users who want to run Shockwave and 3DVIA games. 
+
+For other use cases, it's probably not practical: Flash can already work natively via mitmproxy on MacOS (see https://github.com/juvian/neopets-flash-fix), and otherwise, even if you do need to run a Windows VM to get things working, it's cheaper to do so on a device you already own, like another Windows PC. Guides already exist for those, and I won't cover it here. This is more of a last resort for those MacOS users with no other option.
 
 Currently, this guide only has steps for Google Cloud Platform (GCP). I have no plans to add steps for AWS or Azure.
 
