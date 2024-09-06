@@ -78,9 +78,9 @@ Prereq: A Google Cloud Platform (GCP) account, with billing already set up. (Ref
 
 ## Accomplishing your Neopets goals 
 
-1. Once in the VM, click the "e" in the taskbar. Ignore it when it prompts you to "download Edge". Just go straight to the search bar and Google "chrome" to find, download, and install Google Chrome. (This version of Edge does not have great compatibility with viewing the Github guides linked in the next section, so it's better to use Chrome.)
+1. Once in the VM, click the "e" in the taskbar. Ignore it when it prompts you to "download Edge". Just go straight to the search bar and Google "chrome" to find, download, and install Google Chrome. (This version of Edge does not have great compatibility with viewing the Github guides linked in the next section, so it's better to use Chrome to do the initial setup.)
 
-2. Open Chrome and go to https://github.com/SpudMonkey7k/neopets-IE. Follow the steps in there to download and install Fiddler, Flash, Shockwave, and 3dvia. 
+2. Open Chrome and go to https://github.com/SpudMonkey7k/neopets-IE. Follow all necessary steps in there to download, install, and configure Fiddler, Flash, Shockwave, and 3dvia. 
 
 **Gotchas**:
 - Because this version of Windows 10 is running in the cloud, Fiddler prompts you to use WinConfig to enable traffic capture. Follow its advice - click WinConfig, click Exempt All, and Save Changes.
