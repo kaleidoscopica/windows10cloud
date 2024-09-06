@@ -86,14 +86,17 @@ Prereq: A Google Cloud Platform (GCP) account, with billing already set up. (Ref
 
 **Gotchas**:
 - Because this version of Windows 10 is running in the cloud, Fiddler prompts you to use WinConfig to enable traffic capture. Follow its advice - click WinConfig, click Exempt All, and Save Changes.
-- I did have to install Flash in Windows 7 compatibility mode, and as Administrator.
+- As that guide suggests, I did have to install Flash in Windows 7 compatibility mode, and as Administrator.
 - Internet Explorer is already installed on this version of Windows 10 (you can find it via the start menu/search), so you don't need to follow the section called "Opening IE (Windows 10 and up)". **Do** go down to "Initial IE Setup" and follow those steps, though.
    The guide has a warning that "If IE freezes trying to load Neopets, please remove neopets from Compatibility Settings!" - I did find this to be the case for me.
+- If logging in to Neopets takes a very long time, try closing Fiddler, and reopening it once you're logged in.
 - If you have Neopass, logging in to Neopets first via Chrome is helpful to get your document cookie and copy that over to IE (bottom steps on https://github.com/SpudMonkey7k/neopets-IE under Neopass).
 - Many Neopets main pages don't load in IE, so go directly to https://neopets.com/games/classic.phtml to go to the game library. 
-- The game I tested to make sure Shockwave was working was Hannah and the Pirate Caves. It initially warned me that "It appears that this game is not running at its intended location." Following others advice, I had to press and hold shift + o + k while loading. Loading the game in the lowest setting also seemed to help. 
-- I haven't done much other testing yet, and I didn't try to send a score, so let me know if there's anything missing.
-
+- To install 3dvia Player, try to play Shenkuu River Rush (make sure Fiddler is running). When it says this webpage wants to run the 3DVIA Player add-on, click Allow. When Windows then comes up with the installation prompt, install it. Allow it to reboot (you'll have to RDP back into it when it's done). 
+- You can just click 'No' whenever IE asks you if you want to debug a webpage.
+- The game I tested to make sure Shockwave was working was Hannah and the Pirate Caves. It initially warned me that "It appears that this game is not running at its intended location." Following others advice, I had to press and hold shift + o + k while loading. Loading the game in the lowest setting also seemed to help.
+- I didn't bother trying to get Flash to work, since other guides outline how to do this on Mac just fine. I mainly wanted to get Shockwave and 3dvia working. For Flash, you are better off using other workarounds, as that's easier to get working outside the VM environment (and will cost you less money).
+- I haven't yet tried sending a score. If any issues with that, let me know.
 
 ## Done?
 
