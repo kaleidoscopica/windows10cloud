@@ -103,7 +103,9 @@ Prereq: A Google Cloud Platform (GCP) account, with billing already set up. (Ref
 
 3. **You can pause.** As previously mentioned -- as long as you have autoscaling turned on properly for your sole-tenant node group, and make sure to shut down your VM when not in use, there are already some safeguards in place against the major costs, and you can safely take a pause before coming back another day for more. There will still be small costs accruing (in the order of pennies/hour), but nothing that crazy. The VM does not incur CPU/memory charges while shutdown (assuming your autoscaling also shuts down the node from the sole-tenant node group afterward), but it has a 40GB boot disk that continues accruing pennies/hour storage costs until you fully delete it.
 
-4. **When FULLY done**, performing the full cleanup, that includes _deleting_ the VM and node group (see **Cleanup** section) will make 100% sure you don't accrue any more costs. 
+4. Stopping the VM and restarting it later will likely cause it to acquire a new external IP, so you will have to use that in RDP instead of the previous external IP.
+
+5. **When FULLY done**, performing the full cleanup, that includes _deleting_ the VM and node group (see **Cleanup** section) will make 100% sure you don't accrue any more costs. 
    
 
 # Cleanup
